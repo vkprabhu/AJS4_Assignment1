@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form>
+			<h1>Vehickle form</h1>
+			<input type="text" name="name" placeholder="Name" id="name" /><br /><br />
+			<input type="text" name="description" placeholder="Description" id="des" /><br /><br />
+			<input type="number" name="cpk" placeholder="Cost Per Kilometer" id="cpk" /><br /><br />
+
+			<select id="type" onchange="showFuel()">
+				<option value="">Vehickle Type</option>
+				<option value="two wheeler">Two wheeler</option>
+				<option value="four wheeler">Four wheeler</option>
+			</select>
+
+			<select id="fuel" style="visibility: hidden;"> 
+				<option value="CNG">CHG</option>
+				<option value="Fuel">Fuel</option>
+			</select><br/><br />
+
+			<input type="button" value="Submit" onclick="showVehicle()" />
+		</form>
+		<script type="text/javascript">
+			//show the fuel type if 4-wheeler
+			function showFuel() {
+				var vehicleType = document.getElementById('type').value;
+				if (vehicleType == "four wheeler") {
+					document.getElementById('fuel').style.visibility = 'visible';
+				}
+				else {
+					document.getElementById('fuel').style.visibility = 'hidden';
+				}
+			}
+
+			function showVehicle() {
+			//main ohject
+				function Vehicle(name,des,vehtype,cpk) {
+					this.name = name;
+					this.description = des;
+					this.vehicleType = vehtype;
+					this.costPerKilometer = cpk;
+				}
+				function fourWheeler(fueltype) {
+					this.fuelType = fueltype;
+				}
+				function twoWheeler() {
+				}
+
+				var name = document.getElementById('name').value;
+				var des = document.getElementById('des').value;
+				var mileage = document.getElementById('cpk').value;
+				var vehicleType = document.getElementById('type').value;
+				var fuel = document.getElementById('fuel').value;
+				var vehicle = new Vehicle(name,des,mileage,vehicleType);
+
+				if (vehicleType == "four wheeler") {
+					fourWheeler.prototype = vehicle;
+					var fourwheeler = new fourWheeler(fuel);
+					// alert(fourwheeler.name);
+					// alert(fourwheeler.description);
+					// alert(fourwheeler.vehicleType);
+					// alert(fourwheeler.costPerKilometer);
+					document.write("<h1>Four wheeler details</h1>" + "<br />" + "Name: " + fourwheeler.name + "<br />" + "Description: " + fourwheeler.description + "<br />" + "Vehicle type: " + fourwheeler.vehicleType + "<br />" + "Cost per kilometer: " + fourwheeler.costPerKilometer);
+				} 
+				else {
+					twoWheeler.prototype = vehicle;
+					var twowheeler = new twoWheeler();
+					// alert(twowheeler.name);
+					// alert(twowheeler.description);
+					// alert(twowheeler.vehicleType);
+					// alert(twowheeler.costPerKilometer);
+					document.write("<h1>Two wheeler details</h1>" + "<br />" + "Name: " + twowheeler.name + "<br />" + "Description: " + twowheeler.description + "<br />" + "Vehicle type: " + twowheeler.vehicleType + "<br />" + "Cost per kilometer: " + twowheeler.costPerKilometer);
+				}
+			}
+		</script>
+	</body>
+</html>
